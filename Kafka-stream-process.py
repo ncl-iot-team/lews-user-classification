@@ -87,7 +87,7 @@ class ConKafkaInStreamProcessor(AbstractKafkaInStreamProcessor):
             list2 = []
             list3 = []
             list4 = []
-            with open('User classification data.csv','r')as f:
+            with open('User_classification_data.csv','r')as f:
                 reader = csv.reader(f, delimiter=",")
                 for i, line in enumerate(reader):
                     if(i==1):
