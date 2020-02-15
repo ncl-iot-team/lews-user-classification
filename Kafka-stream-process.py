@@ -112,9 +112,9 @@ class ConKafkaInStreamProcessor(AbstractKafkaInStreamProcessor):
                 util.json_util.add_metadata("User classification","news_agencies")
             elif(data in list2):
                 util.json_util.add_metadata("User classification","govt_agencies")
-            elif(data in list2):
+            elif(data in list3):
                 util.json_util.add_metadata("User classification","ngo")
-            elif(data in list2):
+            else:
                 util.json_util.add_metadata("User classification","other")
 
         except:
