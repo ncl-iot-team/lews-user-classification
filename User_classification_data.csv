@@ -1,5 +1,3 @@
-Categories_name,Handles
-news_agencies,ndtv,TimesNow,timesofindia,the_hindu
-govt_agencies,GeologyIndia,NDMAIndia
+news_agency,ndtv,TimesNow,timesofindia,the_hindu,dd_news
+govt_agency,GeologyIndia,NDMAIndia,dd_news
 ngo,PracticalAction
-
