@@ -46,13 +46,11 @@ class AbstractKafkaInStreamProcessor(ABC):
     def kafka_in_stream_processor(self) -> None:
 
         for message in self.consumer:
-            
-          #  try:
+            try:
                 self.processed_record = self.process_data(message)
-
                 self.produce_data_kafka(self.processed_record)
-         #   except:
-         #       print("Skipping Record..")
+            except:
+                print("Skipping Record..")
 
         
             
@@ -107,7 +105,6 @@ class ConKafkaInStreamProcessor(AbstractKafkaInStreamProcessor):
             data = get_user["screen_name"]
 
             classes = []
-
             for class_list in self.class_matrix:
 
                 if(data in class_list[1:]):
@@ -116,12 +113,12 @@ class ConKafkaInStreamProcessor(AbstractKafkaInStreamProcessor):
 
                     print(f"User:{data} | Class identified: {class_list[0]}")
 
-
-
             if len(classes)>0:
 
                 json_util.add_metadata("lews_meta_user_class",json.dumps(classes))
-
+            
+            else:
+                print("No Class identified for the Twitter handle")
 
         except:
             print("Invalid Tweet Record.. Skipping")
