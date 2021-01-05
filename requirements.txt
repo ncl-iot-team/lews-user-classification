@@ -1,1 +1,1 @@
-kafka-python
+-e git://github.com/nipunbalan/procstream-kafka-python.git#egg=procestream_kafka_python
