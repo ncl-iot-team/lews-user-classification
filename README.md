@@ -1,6 +1,6 @@
-# LEWS Data-pipeline Module Template
+# LEWS User Classification Pipeline Module
 
-This is a template for developing pipeline modules.
+This is a pipeline module for classifying twitter user based on a predefined dictionary
 
 ## Pre-Requisites
 
@@ -10,13 +10,6 @@ This is a template for developing pipeline modules.
 
 - Streaming data in json format
 
-
-## Running in local environment
-### Install all dependancies
-Install dependancies given in requirements.txt. You may add your dependancies in this file for you module
-```bash
-pip install -r requirements.txt
-```
 ### Install and run Kafka Broker
 #### Ubuntu 18.04
 Follow https://www.digitalocean.com/community/tutorials/how-to-install-apache-kafka-on-ubuntu-18-04
@@ -25,15 +18,18 @@ Follow https://medium.com/@shaaslam/installing-apache-kafka-on-windows-495f6f2fd
 #### MacOS
 Follow https://medium.com/pharos-production/apache-kafka-macos-installation-guide-a5a3754f09c
 
-### Running the module
-Install dependancies given in requirements.txt. Add all module dependancies in this file
+## Running in local environment
+### Install dependancies
+Install dependancies given in requirements.txt. 
 ```bash
 pip install -r requirements.txt
 ```
 
+### Running the module
+
 Running
 ```bash
-python Kafka-stream-process.py
+python user_classification.py
 ```
 
 ## Running in Docker (Recommended for Production)
@@ -41,14 +37,17 @@ python Kafka-stream-process.py
 
 
 ```bash
-docker build --tag lews-pipeline-<module name> .
+docker build --tag lews-user-classification .
 ```
 
 ### Usage
 
 ```bash
-docker run -e KAFKA_BROKER="<kafka-broker-host:port>" \
--e MODULE_NAME="<module name>" \
--e MODULE_SRC_TOPIC="<source topic for the module>" \
--e MODULE_TGT_TOPIC="<target topic for the module>" lews-pipeline-<module name>
+docker run -e MODULE_NAME="LEWS-USER-CLASSIFIER" \
+-e CONSUMER_GROUP="LEWS-USER-CLASSIFIER-CG01" \
+-e KAFKA_SOURCE_BOOTSTRAP_SERVERS="<source_kafka_bootstrap_server>" \
+-e KAFKA_SOURCE_TOPIC="<source_topic>" \
+-e KAFKA_TARGET_BOOTSTRAP_SERVERS="<target_kafka_bootstrap_server>" \
+-e KAFKA_TARGET_TOPIC="<target_topic>" \
+-e CLASS_FILENAME="<user_classes_csv_file>" lews-user-classification
 ```

@@ -13,13 +13,13 @@ class StreamProcessLanguageTranslateService(StreamProcessMicroService):
     def read_class_file(self):
         with open(self.config.get("CLASS_FILENAME"), 'r')as f:
             reader = csv.reader(f, delimiter=",")
-            self.class_matrix = []
             for i, class_list in enumerate(reader):
                 self.class_matrix.append(class_list)
 
-    def __init__(self, config_new, translator_obj):
+    def __init__(self, config_new):
         super().__init__(config_new)
-        self.translator_obj = translator_obj
+        self.class_matrix = []
+        self.read_class_file()
 
     def process_message(self, message):
         payload = message.value
@@ -35,7 +35,7 @@ class StreamProcessLanguageTranslateService(StreamProcessMicroService):
                 payload["lews_meta_user_class"] = classes
             else:
                 print("No Class identified for the Twitter handle")
-                payload["lews_meta_user_class"] = ['Other']
+                payload["lews_meta_user_class"] = ['other']
         except:
             logger.error(f"Cannot classify user:{payload}")
         #print(payload)
@@ -43,7 +43,7 @@ class StreamProcessLanguageTranslateService(StreamProcessMicroService):
 
 
 def main():
-    k_service = StreamProcessLanguageTranslateService(config, translator_obj)
+    k_service = StreamProcessLanguageTranslateService(config)
     k_service.start_service()
 
 
