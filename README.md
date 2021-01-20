@@ -24,6 +24,15 @@ Install dependancies given in requirements.txt.
 ```bash
 pip install -r requirements.txt
 ```
+## Configuring User Classes
+File user_classes.csv contains the classes and the twitter handles. The first column represents the class and the 
+subsequent columns are the twitter handles.
+```csv
+news_agency,BBCNews,cnni,ITV,
+govt_agency,GeologyIndia,NDMAIndia,dd_news
+ngo,PracticalAction
+```
+
 
 ### Running the module
 
